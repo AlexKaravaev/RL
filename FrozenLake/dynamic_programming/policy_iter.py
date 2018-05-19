@@ -43,7 +43,7 @@ def policy_eval(policy, env, discount_factor = 1.0, theta = 1e-9, max_iter = 1e9
             return V
 
 
-def policy_iteration(env, discount_factor = 1.0, max_iter = 1e-9):
+def policy_iteration(env, discount_factor = 1.0, max_iter = 1e9):
 
     policy = np.ones([env.nS, env.nA]) / env.nA
 
@@ -52,7 +52,7 @@ def policy_iteration(env, discount_factor = 1.0, max_iter = 1e-9):
 
     for i in range(int(max_iter)):
 
-        stable = False
+        stable = True
 
         # eval current
         V = policy_eval(policy, env, discount_factor = discount_factor)
@@ -77,7 +77,7 @@ def policy_iteration(env, discount_factor = 1.0, max_iter = 1e-9):
 
         eval_policies += 1
 
-
+        print(eval_policies)
         if stable:
             print('Evalueted {} policies'.format(eval_policies))
             return policy, V

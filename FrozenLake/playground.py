@@ -63,7 +63,7 @@ env = gym.make('FrozenLake8x8-v0')
 
 policy, V = policy_iteration(env.env)
 
-print(''.join([action_map[action] for action in np.argmax(policy, axis=1)]))
+print(' '.join([action_map[action] for action in np.argmax(policy, axis=1)]))
 
 wins, total_reward, avg_reward = play_episodes(env, n_episodes, policy)
 print("{} wins out of {} episodes".format(wins, n_episodes))
