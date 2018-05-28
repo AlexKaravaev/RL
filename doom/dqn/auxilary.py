@@ -29,3 +29,20 @@ def stack_images(stacked_frames, cur_frame):
     stacked_frame = np.stack(stacked_frames, axis = 2)
 
     return stacked_frame
+
+# Memory to enable our agent not only learn from current s, a,
+# but every iteration take sample from memory (s, a, r, s')
+class Memory():
+
+    def __init__(self, max_size):
+        self.buf = deque(maxlen = max_size)
+
+    def add(self, exp):
+        self.buf.append(exp)
+
+    def sample(self, batch_size):
+        buf_size = len(self.buf)
+        indx = np.random.choice(np.arange(buf_size),
+                                size = batch_size,
+                                    replace = False)
+        return [self.buf[i] for i in indx]
